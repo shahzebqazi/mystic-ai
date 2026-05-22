@@ -1,0 +1,3 @@
+# Runtime logs (e.g. mlx-openai-server) must not trigger `tauri dev` rebuilds.
+logs/
+target/

@@ -1,0 +1,89 @@
+{
+  "version": "1",
+  "app": {
+    "bundleId": "com.sqazi.minerva",
+    "displayName": "Minerva",
+    "executableModule": "MinervaHost",
+    "swiftProductName": "MinervaHost"
+  },
+  "bridge": {
+    "jsGlobal": "__minervaNative",
+    "messageHandler": "minerva",
+    "commands": [
+      {
+        "name": "searxSearch",
+        "jsName": "searxSearch",
+        "swiftMethod": "handleSearxSearch",
+        "description": "GET SearXNG JSON for query and categories"
+      },
+      {
+        "name": "loadSettings",
+        "jsName": "loadSettings",
+        "swiftMethod": "handleLoadSettings",
+        "description": "Load persisted app settings JSON"
+      },
+      {
+        "name": "saveSettings",
+        "jsName": "saveSettings",
+        "swiftMethod": "handleSaveSettings",
+        "description": "Persist app settings JSON"
+      },
+      {
+        "name": "llmChat",
+        "jsName": "llmChat",
+        "swiftMethod": "handleLlmChat",
+        "description": "POST OpenAI-compatible chat completion (non-streaming MVP)"
+      },
+      {
+        "name": "searxStatus",
+        "jsName": "searxStatus",
+        "swiftMethod": "handleSearxStatus",
+        "description": "Probe configured SearX base URL reachability"
+      }
+    ]
+  },
+  "tokens": {
+    "--void": "#07080b",
+    "--glass-bg": "rgba(255,255,255,0.06)",
+    "--border-subtle": "rgba(255,255,255,0.10)",
+    "--text-primary": "rgba(255,255,255,0.92)",
+    "--text-secondary": "rgba(255,255,255,0.55)",
+    "--accent": "#7eb8ff",
+    "--font-mono": "\"JetBrainsMono Nerd Font\", ui-monospace, monospace",
+    "--font-prose": "\"Inter Variable\", ui-sans-serif, system-ui, sans-serif"
+  },
+  "screens": [
+    {
+      "id": "home",
+      "path": "/",
+      "title": "Search",
+      "description": "Omnibar, hero, results shell"
+    },
+    {
+      "id": "settings",
+      "path": "/settings",
+      "title": "Settings",
+      "description": "SearX + LLM endpoints"
+    },
+    {
+      "id": "fontInspector",
+      "path": "/dev/fonts",
+      "title": "Font inspector",
+      "description": "Dev-only typography check"
+    }
+  ],
+  "assets": {
+    "entries": [
+      {
+        "id": "fonts.jetbrains",
+        "source": "apps/desktop/static/fonts",
+        "role": "font"
+      },
+      {
+        "id": "web.master",
+        "source": "packages/ui-master/build",
+        "role": "webBundle"
+      }
+    ]
+  }
+}

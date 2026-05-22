@@ -1,0 +1,53 @@
+# Build @minerva/ui-master and deploy to GitHub Pages (static + hash router).
+
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build ui-master for GitHub Pages
+        env:
+          # Project site: https://<owner>.github.io/<repo>/ — base must be /repo-name
+          MINERVA_PAGES_BASE: /${{ github.event.repository.name }}
+          # So the Docs hub can link to markdown on GitHub (blob view)
+          PUBLIC_DOCS_REPO_BROWSE: https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}
+        run: npm run ui:master:build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: packages/ui-master/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,8 @@
+# Ignore all Cursor local state by default; allow only committed agent/rule templates.
+*
+!.gitignore
+!README.md
+!agents/
+!agents/**
+!rules/
+!rules/**

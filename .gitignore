@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Rust
+**/target/
+**/*.rs.bk
+
+# SvelteKit / Vite
+.svelte-kit/
+dist/
+.vite/
+
+# macOS / Xcode
+.DS_Store
+*.xcuserstate
+xcuserdata/
+DerivedData/
+*.swiftpm/
+
+# Generated app output (regenerate with tools/codegen)
+generated/
+
+# Workspace build artifacts (build before codegen / pack)
+tools/codegen/dist/
+packages/minerva-ir/dist/
+
+# Env / secrets
+.env
+.env.*
+
+# IDE
+.idea/
+# Cursor: track `.cursor/agents/` and `.cursor/rules/` via `.cursor/.gitignore`; ignore other local state
+
+# Logs / caches
+*.log
+.cache/

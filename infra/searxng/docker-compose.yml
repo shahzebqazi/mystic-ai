@@ -1,0 +1,22 @@
+services:
+  searxng:
+    image: searxng/searxng:latest
+    volumes:
+      - ./settings.yml:/etc/searxng/settings.yml:ro
+    networks:
+      - searx_internal
+
+  caddy:
+    image: caddy:2-alpine
+    depends_on:
+      - searxng
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    networks:
+      - searx_internal
+
+networks:
+  searx_internal:
+    driver: bridge

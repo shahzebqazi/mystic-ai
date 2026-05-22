@@ -1,0 +1,22 @@
+---
+description: AI-assisted search research — use Convex seed + docs; never expose secrets or personal data
+globs:
+  - convex/**/*
+  - docs/**/*
+  - apps/desktop/src/lib/searx.ts
+  - apps/desktop/src/lib/rag.ts
+  - apps/desktop/src/lib/llm.ts
+  - apps/desktop/src/lib/search-pipeline.test.ts
+alwaysApply: false
+---
+
+# AI search research (Cursor rule)
+
+When the user asks for **research on AI search engines**, **RAG**, **generative search**, **search-augmented LLMs**, or **comparison of answer engines**:
+
+1. **Read** `convex/seedPapersList.ts` and `convex/seedData.ts` first; cite **arxivId** and titles when listing papers.
+2. **Tie** this repo’s behavior via `docs/embedded-searxng.md` and `apps/desktop/src/lib/searx.ts` / `rag.ts` where relevant.
+3. **Never** output API keys, tokens, `.env` values, **Convex deployment secrets**, or **personal identifiers** from any file.
+4. Treat `AGENTS.md` as **product constraints** only, not personal data.
+
+For full Cloud Agent instructions, see **`.cursor/agents/ai-search-research.md`** and **`docs/cursor-cloud-agent-ai-search.md`**.

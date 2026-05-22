@@ -1,0 +1,16 @@
+# Reference deployment for `docker compose` (optional; Minerva’s in-app default uses the copy under
+# apps/desktop/src-tauri/resources/searxng/settings.yml). Enables JSON API for programmatic search.
+use_default_settings: true
+
+general:
+  instance_name: "local"
+
+search:
+  formats:
+    - html
+    - json
+
+server:
+  bind_address: "0.0.0.0"
+  port: 8080
+  limiter: false

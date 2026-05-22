@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Glass search — UI mockup</title>
+    <link rel="stylesheet" href="glass.css" />
+  </head>
+  <body>
+    <div class="mock-page">
+      <header class="mock-topbar glass" style="padding: 10px 18px; border-radius: 14px; box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35)">
+        <div class="mock-brand">Local Search</div>
+        <div class="mock-top-actions">
+          <span title="SearXNG" class="mock-dot ok" aria-hidden="true"></span>
+          <span title="llama.cpp" class="mock-dot ok" aria-hidden="true"></span>
+          <button type="button" class="icon-btn" aria-label="Settings">⚙</button>
+        </div>
+      </header>
+
+      <nav class="mock-state-nav glass" style="padding: 10px 14px; border-radius: 14px" aria-label="Mock states">
+        <button type="button" class="is-active" data-panel="empty">Empty</button>
+        <button type="button" data-panel="results">Results + answer</button>
+        <button type="button" data-panel="loading">Loading</button>
+        <button type="button" data-panel="error">Error</button>
+        <button type="button" data-panel="empty-results">No results</button>
+      </nav>
+
+      <!-- Empty -->
+      <section id="panel-empty" class="mock-panel is-visible glass hero-shell" aria-labelledby="hero-heading" aria-hidden="false">
+        <h1 id="hero-heading" class="hero-title">Ask anything</h1>
+        <p class="hero-sub">Metasearch through SearXNG, synthesized on-device with your local model.</p>
+        <div class="query-row">
+          <input class="query-input" type="search" placeholder="e.g. SearXNG JSON API parameters" aria-label="Search query" />
+          <button type="button" class="query-submit">Search</button>
+        </div>
+        <p class="hero-hint"><kbd>↵</kbd> to submit · answers cite sources by number</p>
+      </section>
+
+      <!-- Results -->
+      <section id="panel-results" class="mock-panel" aria-label="Results mock" aria-hidden="true">
+        <div class="query-row" style="max-width: none; margin-bottom: 20px">
+          <input class="query-input glass-strong" type="search" value="self-host SearXNG docker JSON format" readonly tabindex="-1" aria-label="Query (sample)" />
+          <button type="button" class="query-submit">Search</button>
+        </div>
+        <div class="results-grid">
+          <article class="answer-card glass">
+            <div class="answer-label">Answer</div>
+            <div class="answer-body">
+              <p>
+                To expose machine-readable results, enable JSON in your instance config under
+                <code style="color: var(--text-secondary)">search.formats</code>, then call
+                <code style="color: var(--text-secondary)">/search?q=…&amp;format=json</code>
+                <span class="cite" title="Source 1">1</span>. Pair with a reverse proxy for CORS and rate limits
+                <span class="cite" title="Source 2">2</span>.
+              </p>
+              <p>
+                Typical Docker setups mount <code style="color: var(--text-secondary)">settings.yml</code> so you can toggle engines and
+                formats without rebuilding <span class="cite" title="Source 3">3</span>.
+              </p>
+              <p>Nemotron-class models work well for short grounded summaries when context fits the window<span class="caret" aria-hidden="true"></span></p>
+            </div>
+          </article>
+          <aside class="sources-card glass-strong" aria-label="Sources">
+            <div class="sources-head">
+              <span class="sources-title">Sources</span>
+              <span class="sources-meta">8 results · 1.2s</span>
+            </div>
+            <ol class="source-list">
+              <li class="source-item">
+                <span class="source-idx" aria-hidden="true">1</span>
+                <h3 class="source-title"><a href="#">Search API — SearXNG Documentation</a></h3>
+                <div class="source-domain">docs.searxng.org</div>
+                <p class="source-snippet">Describes GET/POST parameters including format=json, engines, and language…</p>
+              </li>
+              <li class="source-item">
+                <span class="source-idx" aria-hidden="true">2</span>
+                <h3 class="source-title"><a href="#">How to use SearXNG as a Private Search API</a></h3>
+                <div class="source-domain">example.com</div>
+                <p class="source-snippet">Step-by-step for self-hosted JSON API and reverse proxy patterns…</p>
+              </li>
+              <li class="source-item">
+                <span class="source-idx" aria-hidden="true">3</span>
+                <h3 class="source-title"><a href="#">SearXNG Docker installation notes</a></h3>
+                <div class="source-domain">example.com</div>
+                <p class="source-snippet">Volume mounts for settings.yml and limiting outbound engines…</p>
+              </li>
+            </ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Loading -->
+      <section id="panel-loading" class="mock-panel" aria-label="Loading mock" aria-hidden="true">
+        <div class="query-row" style="max-width: none; margin-bottom: 20px">
+          <div class="query-input skel-block shimmer skel-line" style="height: 48px; margin: 0; border: none"></div>
+          <div class="query-submit skel-block shimmer" style="width: 96px; opacity: 0.5; border: none"></div>
+        </div>
+        <div class="results-grid">
+          <div class="answer-card glass">
+            <div class="skel-block shimmer skel-line" style="width: 64px; height: 10px; margin-bottom: 18px"></div>
+            <div class="skel-block shimmer skel-line"></div>
+            <div class="skel-block shimmer skel-line"></div>
+            <div class="skel-block shimmer skel-line short"></div>
+            <div class="skel-block shimmer skel-line" style="margin-top: 16px"></div>
+            <div class="skel-block shimmer skel-line tiny" style="margin-top: 8px"></div>
+          </div>
+          <div class="sources-card glass-strong">
+            <div class="skel-block shimmer skel-line" style="width: 72px; height: 10px; margin-bottom: 16px"></div>
+            <div class="skel-block shimmer" style="height: 72px; border-radius: 12px; margin-bottom: 10px"></div>
+            <div class="skel-block shimmer" style="height: 72px; border-radius: 12px; margin-bottom: 10px"></div>
+            <div class="skel-block shimmer" style="height: 72px; border-radius: 12px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Error -->
+      <section id="panel-error" class="mock-panel" aria-label="Error mock" aria-hidden="true">
+        <div class="query-row" style="max-width: none; margin-bottom: 20px">
+          <input class="query-input glass-strong" type="search" value="rate limited query sample" readonly tabindex="-1" />
+          <button type="button" class="query-submit">Search</button>
+        </div>
+        <div class="callout-error glass-strong" role="alert">
+          <span class="callout-icon" aria-hidden="true">!</span>
+          <div>
+            <strong>Search temporarily unavailable</strong>
+            <p>Upstream engines returned HTTP 429. Wait a few seconds or reduce engine count in SearXNG settings.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- No results -->
+      <section id="panel-empty-results" class="mock-panel" aria-label="No results mock" aria-hidden="true">
+        <div class="query-row" style="max-width: none; margin-bottom: 20px">
+          <input class="query-input glass-strong" type="search" value="zzzzzznonexistenttoken12345" readonly tabindex="-1" />
+          <button type="button" class="query-submit">Search</button>
+        </div>
+        <div class="answer-card glass" style="padding: 28px">
+          <div class="answer-label">No web results</div>
+          <p class="answer-body" style="margin: 0; color: var(--text-secondary)">Try a shorter query, different keywords, or enable more engines in SearXNG.</p>
+        </div>
+      </section>
+
+      <p class="mock-foot">Static mockup — Phase 0 · open <code>mockup/search-glass.html</code> in a browser</p>
+    </div>
+
+    <script>
+      (function () {
+        var buttons = document.querySelectorAll(".mock-state-nav button");
+        var panels = {
+          empty: document.getElementById("panel-empty"),
+          results: document.getElementById("panel-results"),
+          loading: document.getElementById("panel-loading"),
+          error: document.getElementById("panel-error"),
+          "empty-results": document.getElementById("panel-empty-results"),
+        };
+
+        function show(id) {
+          Object.keys(panels).forEach(function (key) {
+            var el = panels[key];
+            var on = key === id;
+            el.classList.toggle("is-visible", on);
+            el.setAttribute("aria-hidden", on ? "false" : "true");
+          });
+          buttons.forEach(function (btn) {
+            btn.classList.toggle("is-active", btn.getAttribute("data-panel") === id);
+          });
+        }
+
+        buttons.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            show(btn.getAttribute("data-panel"));
+          });
+        });
+
+        var initial = new URLSearchParams(location.search).get("panel");
+        if (initial && panels[initial]) {
+          show(initial);
+        }
+      })();
+    </script>
+  </body>
+</html>
