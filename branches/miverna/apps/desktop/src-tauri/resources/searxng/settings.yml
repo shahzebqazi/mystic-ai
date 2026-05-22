@@ -1,0 +1,19 @@
+# Bundled defaults for Minerva’s Docker sidecar (merged with SearXNG upstream defaults).
+# Edit the copy under app data (see Settings → path) to change engines, bots, or formats.
+# Reference: https://docs.searxng.org/admin/settings/settings.html
+use_default_settings: true
+
+general:
+  instance_name: "minerva-local"
+
+search:
+  formats:
+    - html
+    - json
+
+server:
+  # Bind inside the container; host port is mapped to 127.0.0.1 only by Minerva.
+  bind_address: "0.0.0.0"
+  port: 8080
+  # Avoid bot/limiter middleware that expects Redis and can interfere with local API use.
+  limiter: false

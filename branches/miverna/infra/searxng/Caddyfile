@@ -1,0 +1,16 @@
+:8080 {
+	encode zstd gzip
+
+	@cors_preflight method OPTIONS
+	handle @cors_preflight {
+		header Access-Control-Allow-Origin *
+		header Access-Control-Allow-Methods "GET, POST, OPTIONS"
+		header Access-Control-Allow-Headers *
+		respond "" 204
+	}
+
+	header Access-Control-Allow-Origin *
+	header Access-Control-Allow-Methods "GET, POST, OPTIONS"
+
+	reverse_proxy searxng:8080
+}

@@ -1,0 +1,64 @@
+# Minerva / perplexity-killer — continuous integration
+# Primary product path: IR + codegen + @minerva/ui-master + generated macOS host.
+
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  node:
+    name: Node — IR, codegen tests, ui-master
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build @minerva/ir
+        run: npm run ir:build
+
+      - name: Codegen unit tests
+        run: npm run test:codegen
+
+      - name: Svelte check (ui-master)
+        run: npm run check --workspace=@minerva/ui-master
+
+      - name: Build ui-master (static adapter)
+        run: npm run ui:master:build
+
+  macos-swift:
+    name: macOS — Swift package (codegen + build)
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build @minerva/ir (codegen dependency)
+        run: npm run ir:build
+
+      - name: Emit generated/macos + build Swift
+        run: npm run codegen:macos && swift build --package-path generated/macos

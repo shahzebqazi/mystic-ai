@@ -1,0 +1,58 @@
+{
+  "name": "perplexity-killer",
+  "private": true,
+  "description": "Minerva monorepo: master Svelte UI, IR, macOS codegen, legacy Tauri app",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "packages/*",
+    "tools/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --prefix apps/desktop",
+    "build": "npm run build --prefix apps/desktop",
+    "preview": "npm run preview --prefix apps/desktop",
+    "check": "npm run check --prefix apps/desktop",
+    "tauri": "npm run tauri --prefix apps/desktop",
+    "tauri:dev": "npm run tauri dev --prefix apps/desktop",
+    "install:mlx-server": "python3 -m pip install --user mlx-openai-server",
+    "download-model:nemotron": "bash scripts/download-nemotron-model.sh",
+    "download-model:nemotron-mlx-4b": "bash scripts/download-nemotron-mlx-4b.sh",
+    "ir:build": "npm run build --workspace=@minerva/ir",
+    "codegen": "npm run build --workspace=@minerva/codegen && node tools/codegen/dist/cli.js",
+    "codegen:macos": "npm run codegen -- --ir packages/minerva-ir/fixtures/default.ir.json --emit macos --out generated/macos",
+    "ui:master:dev": "npm run dev --workspace=@minerva/ui-master",
+    "ui:master:build": "npm run build --workspace=@minerva/ui-master",
+    "ui:master:preview": "npm run preview --workspace=@minerva/ui-master",
+    "test": "npm run test:codegen",
+    "test:codegen": "npm test --workspace=@minerva/codegen",
+    "ci": "npm run ir:build && npm run test:codegen && npm run check --workspace=@minerva/ui-master && npm run ui:master:build",
+    "ci:macos": "npm run codegen:macos && swift build --package-path generated/macos && swift run --package-path generated/macos MinervaHostSelfTest",
+    "test:macos": "npm run codegen:macos && swift build --package-path generated/macos && swift run --package-path generated/macos MinervaHostSelfTest",
+    "test:macos:integration": "npm run codegen:macos && swift build --package-path generated/macos && MINERVA_INTEGRATION_TESTS=1 swift run --package-path generated/macos MinervaHostSelfTest",
+    "macos:sync-web": "bash scripts/sync-macos-web-assets.sh",
+    "macos:host": "bash scripts/run-minerva-host.sh",
+    "macos:host:dev": "bash scripts/run-minerva-host-dev.sh",
+    "convex:seed": "npx convex run seed:seedResearchInsights"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shahzebqazi/minerva-ai-search-engine.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shahzebqazi/minerva-ai-search-engine/issues"
+  },
+  "homepage": "https://github.com/shahzebqazi/minerva-ai-search-engine#readme",
+  "devDependencies": {
+    "convex": "^1.34.1"
+  }
+}
