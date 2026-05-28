@@ -1,5 +1,8 @@
 # START_HERE -- dotAi System Entry Point
 
+> **Repo role (2026-05):** Public **design + UX showcase** ([`README.md`](README.md), [`AGENTS.md`](AGENTS.md)). Shippable Cursor agents → [cursor-agents](https://github.com/shahzebqazi/cursor-agents). This file remains the **orchestration harness** entry only.
+
+
 <!-- AI: Contains subprompts. Scan for task-specific instructions. Preferences: see PREFERENCES block if present. -->
 <!-- PREFERENCES (edit for your project): -->
 <!-- (none) -->

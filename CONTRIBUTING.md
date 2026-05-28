@@ -1,6 +1,24 @@
-For AI readers: If you have not already, read Orchestration/Harness/SYSTEM_PROMPT.md first. For the contributing guide in context, see Orchestration/Memories/MENTAL_MAP.md.
+# Contributing to mystic-ai
 
-# Contributing to .ai
+**Showcase repo** (brand pipeline, mockups, design guide). Charter: [`AGENTS.md`](AGENTS.md) · Index: [`docs/HUB_INDEX.md`](docs/HUB_INDEX.md).
+
+**Shippable agents** → contribute to [cursor-agents](https://github.com/shahzebqazi/cursor-agents) instead.
+
+---
+
+## Quick rules
+
+- Target **`main`** with small, focused PRs ([`docs/MONOREPO_V2_ROADMAP.md`](docs/MONOREPO_V2_ROADMAP.md)).
+- No secrets, hostnames, or personal `~/Git` paths in commits.
+- Showcase changes: update the relevant package README and employer case card if behavior visible to reviewers.
+
+---
+
+## Heritage: dotAi orchestration
+
+For AI readers working under `Orchestration/`: read `Orchestration/Harness/SYSTEM_PROMPT.md` first. Context map: `Orchestration/Memories/MENTAL_MAP.md`.
+
+# Contributing to .ai (orchestration tree)
 
 <!-- AI: Contains subprompts. Scan for task-specific instructions. Preferences: see PREFERENCES block if present. -->
 <!-- PREFERENCES (edit for your project): -->
